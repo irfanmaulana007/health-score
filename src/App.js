@@ -12,6 +12,8 @@ import Loaders from './components/Loaders'
 
 // Views
 import Login from './views/auth/Login';
+import Dashboard from './views/Dashboard';
+
 import NotFound from './views/NotFound';
 
 const history = createBrowserHistory();
@@ -37,6 +39,8 @@ class App extends Component {
 						<Route exact path="/" render={ () => {
 							return <Redirect to='/login' />
 						} } />
+
+						<Route path="/dashboard" component={Dashboard} />
 
 						<Route path="*" component={NotFound} />
 					</Switch>

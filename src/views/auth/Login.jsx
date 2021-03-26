@@ -26,28 +26,15 @@ class Login extends Component {
     }
 
     login = () => {
-        store.dispatch(startLoading('Logging in . . .'));
-        authService.login(this.state)
-        .then((res) => { 
-            setToken(res.data.token);
-            setID(res.data.user.id);
+        // store.dispatch(startLoading('Logging in . . .'));
+        // authService.login(this.state)
+        // .then((res) => { 
+            // setToken(res.data.token);
+            // setID(res.data.user.id);
 
             this.props.history.push('/dashboard');
-        })
-		.finally(() => { store.dispatch(stopLoading()) })
-    }
-
-    handleDocumentClick = (e) => {
-        if (e.keyCode === 13) {
-            this.login();
-        }
-    }
-
-    componentWillMount () {
-        document.addEventListener("keydown", this.handleDocumentClick, false);
-    }
-    componentWillUnmount () {
-        document.removeEventListener("keydown", this.handleDocumentClick, false);
+        // })
+		// .finally(() => { store.dispatch(stopLoading()) })
     }
 
     render () {

@@ -1,0 +1,21 @@
+html, #root {
+    background-color: #f5f3ef;
+}
+
+.content {
+    padding: 80px 20px 20px 260px;
+    min-height: 600px;
+}
+
+a { transition: .2s ease; }
+a, a:hover { text-decoration: none!important; }
+a:hover { color: #fff!important; }
+
+.text-light-1 { color: #bcbcbc }
+
+.card {
+    padding: 30px;
+    border: none!important;
+    border-radius: 10px!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
