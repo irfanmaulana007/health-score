@@ -1,43 +1,52 @@
 import axios from 'axios';
 import _ from 'lodash';
 
-import { API_URL } from './config';
+import { API_URL, API_DS_URL } from './config';
 import { createErrorObject } from '../components/createErrorObject';
 // import { createNotification } from '../components/utils/Notifications';
 
-axios.defaults.baseURL = API_URL;
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-axios.interceptors.request.use(
-	config => {
-		let token = localStorage.getItem('token')
+// axios.defaults.baseURL = API_URL;
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// axios.interceptors.request.use(
+// 	config => {
+// 		let token = localStorage.getItem('token')
   
-		if (token) {
-		  config.headers['Authorization'] = `Bearer ${ token }`
-		}
+// 		if (token) {
+// 		  config.headers['Authorization'] = `Bearer ${ token }`
+// 		}
 	
-		return config
-	},
-	error => {
-		return Promise.reject(error);
+// 		return config
+// 	},
+// 	error => {
+// 		return Promise.reject(error);
+// 	}
+// )
+const healthScore = axios.create({
+	baseURL: API_URL,
+	headers: {
+	  'Accept': 'application/json',
+	  'Content-Type': 'application/json',
+	  'Access-Control-Allow-Origin': '*',
 	}
-)
+});
+
+const healthScoreDS = axios.create({
+	baseURL: API_DS_URL,
+	headers: {
+	  'Accept': 'application/json',
+	  'Content-Type': 'application/json',
+	  'Access-Control-Allow-Origin': '*',
+	}
+});
 
 const apiService = {
 	get (resource) {
-		return axios
+		return healthScore
 			.get(resource)
 			.then((res) => {
 				return res
 			})
             .catch((err) => {
-				if (err.response.data.status === "expired") {
-					localStorage.clear();
-					// createNotification('error', 'Silahkan melakukan login ulang.', 'Session habis');
-					// this.props.history.push("/login");
-					// window.location("/login");
-				} else {
-					// createNotification('error', 'Kontak IT Support untuk mengetahui kendala.', 'Terjadi kesalahan');
-				}
 				createErrorObject(err.response.status);
 
 				throw err;
@@ -45,17 +54,9 @@ const apiService = {
 	},
 
 	put (resource, params) {
-		return axios
+		return healthScore
 			.put(resource, params)
             .catch((err) => {
-				if (err.response.data.status === "expired") {
-					localStorage.clear();
-					// createNotification('error', 'Silahkan melakukan login ulang.', 'Session habis');
-					// this.props.history.push("/login");
-					// window.location("/login");
-				} else {
-					// createNotification('error', 'Kontak IT Support untuk mengetahui kendala.', 'Terjadi kesalahan');
-				}
 				createErrorObject(err.response.status);
 
 				throw err;
@@ -63,18 +64,9 @@ const apiService = {
 	},
 
 	post (resource, params) {
-		return axios
+		return healthScore
 			.post(resource, params)
             .catch((err) => {
-				if (err.response.data.status === "expired") {
-					localStorage.clear();
-					// createNotification('error', 'Silahkan melakukan login ulang.', 'Session habis');
-					// this.props.history.push("/login");
-					// window.location = "/login";
-				} else {
-					console.log(err.response);
-					// createNotification('error', _.get(err, 'response.data.message', 'Kontak IT Support untuk mengetahui kendala.'), 'Terjadi kesalahan');
-				}
 				createErrorObject(err.response.status);
 
 				throw err;
@@ -82,20 +74,32 @@ const apiService = {
 	},
 
 	delete (resource) {
-		return axios
+		return healthScore
 			.delete(resource)
             .catch((err) => {
-				if (err.response.data.status === "expired") {
-					localStorage.clear();
-					// createNotification('error', 'Silahkan melakukan login ulang.', 'Session habis');
-					// this.props.history.push("/login");
-				} else {
-					// createNotification('error', 'Kontak IT Support untuk mengetahui kendala.', 'Terjadi kesalahan');
-				}
 				createErrorObject(err.response.status);
 
 				throw err;
             })
+	}
+}
+
+const apiServiceDS = {
+	post (resource, params) {
+		return healthScoreDS
+			.post(resource, params)
+            .catch((err) => {
+				createErrorObject(err);
+
+				throw err;
+            })
+	},
+}
+
+export const DSService = {
+	calculateHealthScore (payload) {
+		return apiServiceDS
+			.post('', payload)
 	}
 }
 

@@ -10,7 +10,10 @@ import General from './components/illness input/General';
 import Critical from './components/illness input/Critical';
 import Mental from './components/illness input/Mental';
 
-import { HealthScoreService } from './../commons/api.service';
+import { DSService, HealthScoreService } from './../commons/api.service';
+
+import store from './../store';
+import { startLoading, stopLoading } from './../actions';
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -27,7 +30,8 @@ export default class Dashboard extends Component {
             mental: {
                 illnessSelected: [],
                 illnessWeight: 0
-            }
+            },
+            score: null
         }
     }
 
@@ -68,11 +72,29 @@ export default class Dashboard extends Component {
     }
 
     calculateHealthScore = () => {
-        console.log(this.state);
+        store.dispatch(startLoading('Calculating Health Score . . .'));
+
+        const DSPayload = {
+            customer_id: 2,
+            critical_illness: this.state.critical.illnessSelected,
+            general_illness: this.state.general.illnessSelected,
+            mental_illness: this.state.mental.illnessSelected
+        }
+
         HealthScoreService.calculateHealthScore(this.state);
+        DSService.calculateHealthScore(DSPayload)
+        .then((res) => {
+            this.setState({ score: res.data.score })
+        })
+        .finally(() => {
+            window.scrollTo(0,document.body.scrollHeight);
+            store.dispatch(stopLoading())
+        });
     }
 
     render () {
+        const { score } = this.state;
+
         return (
             <div>
                 <Navigation />
@@ -89,6 +111,18 @@ export default class Dashboard extends Component {
                             <button onClick={this.calculateHealthScore} className="btn btn-block btn-theme">Submit</button>
                         </div>
                     </div>
+                    <br/>
+
+                    {score &&
+                        <div className="row">
+                            <div className="col">
+                                <div className="card mb-3">
+                                    <h4 className="text-dark font-weight-light">Health Score</h4>
+                                    <h1>{score}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
 
                 <Footer />

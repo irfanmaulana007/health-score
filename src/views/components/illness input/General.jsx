@@ -7,6 +7,9 @@ import FormGroup from './../../../components/FormGroup';
 
 import { IllnessService } from './../../../commons/api.service';
 
+import store from './../../../store';
+import { startLoading, stopLoading } from './../../../actions';
+
 export default class General extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +21,7 @@ export default class General extends Component {
     }
 
     fetchGeneralICD = () => {
+        store.dispatch(startLoading('Fetching General Illness Data . . .'));
         IllnessService.getGeneralICD()
         .then((res) => {
             this.setState({
@@ -29,6 +33,7 @@ export default class General extends Component {
                 })
             })
         })
+        .finally(() => store.dispatch(stopLoading()));
     }
 
     componentDidMount () {
