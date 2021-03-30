@@ -15,7 +15,7 @@
     position: fixed;
     left: 0;
     padding: 20px;
-    background-color: #21211f;
+    /* background-color: #21211f; */
 }
 
 #sidenav ul li {
@@ -28,7 +28,7 @@
 footer {
     padding: 0 20px;
     font-size: smaller;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
 }

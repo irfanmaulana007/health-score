@@ -41,24 +41,17 @@ class Login extends Component {
         return (
             <div>
                 <div id="login-background"></div>
-                <div className="row p-5">
-                    <div className="col-6 text-center">
-                        <div className="box pt-5 ml-5 text-white">
-                            {/* <img src={Logo} alt="" height="120px" /> */}
-                            <p>Sign in untuk menggunakan POS</p>
-                        </div>
-                    </div>
-                    <div className="col-5">
-                        <div className="box bg-white">
-                            <h3>Sign in</h3>
+                <div className="row mt-5">
+                    <div className="col-6 offset-3">
+                        <div className="card bg-white p-4 mt-5">
+                            <h4 className="text-center">Health Score by Semut Merah Analytics</h4>
                             <br />
 
                             <FormGroup name="email" autoFocus onChange={this.handleChange} value={this.state.email} />
                             <FormGroup name="password" type="password" onChange={this.handleChange}  value={this.state.password}/>
-                            <h6 className="text-right small"><Link to="/" >Forgot Password</Link></h6>
                             <br/>
 
-                            <button onClick={this.login} className="btn btn-primary btn-block">Login (Enter)</button>
+                            <button onClick={this.login} className="btn btn-primary btn-block">Sign In</button>
                         </div>
                     </div>
                 </div>

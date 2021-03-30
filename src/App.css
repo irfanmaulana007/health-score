@@ -9,9 +9,9 @@ html, #root {
 
 a { transition: .2s ease; }
 a, a:hover { text-decoration: none!important; }
-a:hover { color: #fff!important; }
+nav a:hover { color: #fff!important; }
 
-.text-light-1 { color: #bcbcbc }
+.text-light-1 { color: #ddd }
 
 .card {
     padding: 30px;
@@ -19,3 +19,7 @@ a:hover { color: #fff!important; }
     border-radius: 10px!important;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
+
+.bg-theme { background-color: #b3001e; }
+.btn-theme { background-color: #d20023!important; color: #ddd!important; }
+.btn-theme:hover { background-color: #b3001e!important; color: #fff!important; }

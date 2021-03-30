@@ -13,6 +13,7 @@ import Loaders from './components/Loaders'
 // Views
 import Login from './views/auth/Login';
 import Dashboard from './views/Dashboard';
+import Result from './views/Result';
 
 import NotFound from './views/NotFound';
 
@@ -41,6 +42,7 @@ class App extends Component {
 						} } />
 
 						<Route path="/dashboard" component={Dashboard} />
+						<Route path="/result" component={Result} />
 
 						<Route path="*" component={NotFound} />
 					</Switch>

@@ -111,30 +111,26 @@ export const authService = {
 	}
 }
 
-// Transaction
-export const SalesService = {
-	get () {
+export const IllnessService = {
+	getCriticalICD () {
 		return apiService
-			.get('order')
+			.get('critical-illness-icd')
 	},
     
-	detail (id) {
+	getGeneralICD () {
 		return apiService
-			.get('order/' + id)
+			.get('general-illness-icd')
 	},
     
-	create (payload) {
+	getMentalICD () {
 		return apiService
-			.post('order', payload)
-	},
-    
-	update (id, payload) {
+			.get('mental-illness-icd')
+	}
+}
+
+export const HealthScoreService = {
+	calculateHealthScore (payload) {
 		return apiService
-			.put('order/' + id, payload)
-	},
-    
-	delete (id) {
-		return apiService
-			.delete('order/' + id)
+			.post('calculate-health-score', payload)
 	}
 }
