@@ -21,7 +21,7 @@ export default class Mental extends Component {
     }
 
     fetchMentalICD = () => {
-        store.dispatch(startLoading('Fetching Mental Illness Data . . .'));
+        store.dispatch(startLoading('Fetching Illness Data . . .'));
         IllnessService.getMentalICD()
         .then((res) => {
             this.setState({
@@ -125,7 +125,7 @@ export default class Mental extends Component {
                             </div>
                         }
 
-                        <FormGroup label="illness weight (0-1)" type="number" min="0" max="1" step="0.1" name="mental_weight" onChange={this.props.handleChangeCustomerWeight} required />
+                        <FormGroup label="illness weight (0-1)" type="number" min="0" max="1" step="0.1" name="mental_weight" value={this.props.state.illnessWeight} onChange={this.props.handleChangeCustomerWeight} required />
                     </div>
                 </div>
             </div>

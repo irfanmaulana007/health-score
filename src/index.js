@@ -10,6 +10,7 @@ import store from './store'
 // Plugins
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'react-notifications/lib/notifications.css';
 
 // Fonts
 import './font.css';

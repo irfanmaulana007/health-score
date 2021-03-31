@@ -21,7 +21,7 @@ export default class Critical extends Component {
     }
 
     fetchCriticalICD = () => {
-        store.dispatch(startLoading('Fetching Critical Illness Data . . .'));
+        store.dispatch(startLoading('Fetching Illness Data . . .'));
         IllnessService.getCriticalICD()
         .then((res) => {
             this.setState({
@@ -125,7 +125,7 @@ export default class Critical extends Component {
                             </div>
                         }
 
-                        <FormGroup label="illness weight (0-1)" type="number" min="0" max="1" step="0.1" name="critical_weight" onChange={this.props.handleChangeCustomerWeight} required />
+                        <FormGroup label="illness weight (0-1)" type="number" min="0" max="1" step="0.1" name="critical_weight" value={this.props.state.illnessWeight} onChange={this.props.handleChangeCustomerWeight} required />
                     </div>
                 </div>
             </div>

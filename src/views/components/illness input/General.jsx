@@ -21,7 +21,7 @@ export default class General extends Component {
     }
 
     fetchGeneralICD = () => {
-        store.dispatch(startLoading('Fetching General Illness Data . . .'));
+        store.dispatch(startLoading('Fetching Illness Data . . .'));
         IllnessService.getGeneralICD()
         .then((res) => {
             this.setState({
@@ -125,7 +125,7 @@ export default class General extends Component {
                             </div>
                         }
 
-                        <FormGroup label="illness weight (0-1)" type="number" min="0" max="1" step="0.1" name="general_weight" onChange={this.props.handleChangeCustomerWeight} required />
+                        <FormGroup label="illness weight (0-1)" type="number" min="0" max="1" step="0.1" name="general_weight" value={this.props.state.illnessWeight} onChange={this.props.handleChangeCustomerWeight} required />
                     </div>
                 </div>
             </div>

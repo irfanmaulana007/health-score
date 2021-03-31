@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { NotificationContainer } from 'react-notifications';
 
 import Navigation from './../components/Navigation';
 import SideNavigation from './../components/SideNavigation';
@@ -9,6 +10,7 @@ import Footer from './../components/Footer';
 import General from './components/illness input/General';
 import Critical from './components/illness input/Critical';
 import Mental from './components/illness input/Mental';
+import { createNotification } from '../components/Notifications';
 
 import { DSService, HealthScoreService } from './../commons/api.service';
 
@@ -72,39 +74,26 @@ export default class Dashboard extends Component {
     }
 
     calculateHealthScore = () => {
-        store.dispatch(startLoading('Calculating Health Score . . .'));
-
-        // const DSPayload = {
-        //     customer_id: 2,
-        //     critical_illness: this.state.critical.illnessSelected,
-        //     general_illness: this.state.general.illnessSelected,
-        //     mental_illness: this.state.mental.illnessSelected
-        // }
+        store.dispatch(startLoading('Submit Illness List . . .'));
 
         HealthScoreService.addIllnessList(this.state)
-        .finally(() => {
+        .then((res) => {
+            createNotification('success', res.data, 'Submit Success')
             this.refreshCritical();
             this.refreshGeneral();
             this.refreshMental();
-            store.dispatch(stopLoading)
+        })
+        .finally(() => {
+            store.dispatch(stopLoading())
         });
-        // DSService.calculateHealthScore(DSPayload)
-        // .then((res) => {
-        //     this.setState({ score: res.data.score })
-        // })
-        // .finally(() => {
-        //     window.scrollTo(0,document.body.scrollHeight);
-        //     store.dispatch(stopLoading())
-        // });
     }
 
     render () {
-        const { score } = this.state;
-
         return (
             <div>
                 <Navigation />
                 <SideNavigation />
+                <NotificationContainer />
 
                 <div className="content">
                     <div className="row">
@@ -118,17 +107,6 @@ export default class Dashboard extends Component {
                         </div>
                     </div>
                     <br/>
-
-                    {/* {score &&
-                        <div className="row">
-                            <div className="col">
-                                <div className="card mb-3">
-                                    <h4 className="text-dark font-weight-light">Health Score</h4>
-                                    <h1>{score}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    } */}
                 </div>
 
                 <Footer />

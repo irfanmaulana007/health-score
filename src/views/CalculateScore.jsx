@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import _ from 'lodash';
+import { NotificationContainer } from 'react-notifications';
 
 import Navigation from '../components/Navigation';
 import SideNavigation from '../components/SideNavigation';
 import Footer from '../components/Footer';
+import { createNotification } from '../components/Notifications';
 
 import { DSService, IllnessService, HealthScoreService } from '../commons/api.service';
 
@@ -27,7 +29,7 @@ export default class CalculateScore extends Component {
     }
 
     fetchCriticalIllnessList = () => {
-        store.dispatch(startLoading('Fetching Critical Illness List . . .'));
+        store.dispatch(startLoading('Fetching Illness List . . .'));
 
         IllnessService.getCriticalList()
         .then((res) => this.setState({
@@ -39,7 +41,7 @@ export default class CalculateScore extends Component {
     }
 
     fetchGeneralIllnessList = () => {
-        store.dispatch(startLoading('Fetching General Illness List . . .'));
+        store.dispatch(startLoading('Fetching Illness List . . .'));
 
         IllnessService.getGeneralList()
         .then((res) => this.setState({
@@ -51,7 +53,7 @@ export default class CalculateScore extends Component {
     }
 
     fetchMentalIllnessList = () => {
-        store.dispatch(startLoading('Fetching Mental Illness List . . .'));
+        store.dispatch(startLoading('Fetching Illness List . . .'));
 
         IllnessService.getMentalList()
         .then((res) => this.setState({
@@ -82,11 +84,11 @@ export default class CalculateScore extends Component {
         }
 
         HealthScoreService.calculateHealthScore(this.state);
-
         DSService.calculateHealthScore(payload)
         .then((res) => {
             this.setState({ score: res.data.score })
         })
+        .catch((err) => createNotification('error', 'Calculate Health Score Failed', 'Something Wrong'))
         .finally(() => {
             window.scrollTo(0,document.body.scrollHeight);
             store.dispatch(stopLoading())
@@ -100,6 +102,7 @@ export default class CalculateScore extends Component {
             <div>
                 <Navigation />
                 <SideNavigation />
+                <NotificationContainer />
 
                 <div className="content">
                     <div className="row">
@@ -122,7 +125,7 @@ export default class CalculateScore extends Component {
                 
                         <br/>
                         <div className="col">
-                            <button onClick={this.calculateHealthScore} className="btn btn-block btn-theme">Submit</button>
+                            <button onClick={this.calculateHealthScore} className="btn btn-block btn-theme">Calculate</button>
                         </div>
                     </div>
                     <br/>

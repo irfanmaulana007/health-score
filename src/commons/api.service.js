@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 import { API_URL, API_DS_URL } from './config';
 import { createErrorObject } from '../components/createErrorObject';
-// import { createNotification } from '../components/utils/Notifications';
 
 const healthScore = axios.create({
 	baseURL: API_URL,
