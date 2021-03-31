@@ -70,20 +70,20 @@ export default class CalculateScore extends Component {
         this.fetchMentalIllnessList();
     }
 
-    handleSelectCriticalIllness = (illness) => { this.setState({ critical_illness: [illness] }) }
-    handleSelectGeneralIllness = (illness) => { this.setState({ general_illness: [illness] }) }
-    handleSelectMentalIllness = (illness) => { this.setState({ mental_illness: [illness] }) }
+    handleSelectCriticalIllness = (illness) => { this.setState({ critical_illness: illness })}
+    handleSelectGeneralIllness = (illness) => { this.setState({ general_illness: illness }) }
+    handleSelectMentalIllness = (illness) => { this.setState({ mental_illness: illness }) }
 
     calculateHealthScore = () => {
         store.dispatch(startLoading('Calculating Health Score . . .'));
 
         const payload = {
-            critical_illness: this.state.critical_illness,
-            general_illness: this.state.general_illness,
-            mental_illness: this.state.mental_illness
+            customer_id: 2,
+            critical_illness: _.map(this.state.critical_illness, ((o) => { return o.value } )),
+            general_illness: _.map(this.state.general_illness, ((o) => { return o.value } )),
+            mental_illness: _.map(this.state.mental_illness, ((o) => { return o.value } ))
         }
 
-        HealthScoreService.calculateHealthScore(this.state);
         DSService.calculateHealthScore(payload)
         .then((res) => {
             this.setState({ score: res.data.score })

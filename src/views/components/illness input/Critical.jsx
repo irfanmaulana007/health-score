@@ -26,10 +26,10 @@ export default class Critical extends Component {
         .then((res) => {
             this.setState({
                 criticalIllnessICDCritical: _.map(_.groupBy(_.sortBy(res.data, 'illness'), 'illness'), (o) =>{
-                    return { value: o[0].illness, label: o[0].illness, weight: 0 }
+                    return { value: o[0].illness, label: o[0].illness, weight: 1 }
                 }),
                 criticalIllnessICDDetail: _.map(_.sortBy(res.data, 'icd10Title'), (o) =>{
-                    return { value: o.icd10Code, label: o.icd10Title, weight: 0 }
+                    return { value: o.icd10Code, label: o.icd10Title, weight: 1 }
                 })
             })
         })
@@ -93,7 +93,7 @@ export default class Critical extends Component {
                                             <input type="text" defaultValue={values.label} className="form-control" disabled />
                                         </div>
                                         <div className="col-6">
-                                            <input type="number" min="1" max="5" className="form-control" onChange={(e) => this.props.handleChangeWeight(values.value, e)} />
+                                            <input type="number" min="1" max="5" className="form-control" defaultValue={values.weight} onChange={(e) => this.props.handleChangeWeight(values.value, e)} />
                                         </div>
                                     </div>
                                 )}
@@ -118,7 +118,7 @@ export default class Critical extends Component {
                                             <input type="text" defaultValue={values.label} className="form-control" disabled />
                                         </div>
                                         <div className="col-6">
-                                            <input type="number" min="1" max="5" className="form-control" onChange={(e) => this.props.handleChangeWeight(values.value, e)} />
+                                            <input type="number" min="1" max="5" className="form-control" defaultValue={values.weight} onChange={(e) => this.props.handleChangeWeight(values.value, e)} />
                                         </div>
                                     </div>
                                 )}
