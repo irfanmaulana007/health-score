@@ -13,6 +13,7 @@ import Loaders from './components/Loaders'
 // Views
 import Login from './views/auth/Login';
 import Dashboard from './views/Dashboard';
+import CalculateScore from './views/CalculateScore';
 import Result from './views/Result';
 
 import NotFound from './views/NotFound';
@@ -42,6 +43,7 @@ class App extends Component {
 						} } />
 
 						<Route path="/dashboard" component={Dashboard} />
+						<Route path="/calculate-score" component={CalculateScore} />
 						<Route path="/result" component={Result} />
 
 						<Route path="*" component={NotFound} />

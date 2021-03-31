@@ -5,22 +5,6 @@ import { API_URL, API_DS_URL } from './config';
 import { createErrorObject } from '../components/createErrorObject';
 // import { createNotification } from '../components/utils/Notifications';
 
-// axios.defaults.baseURL = API_URL;
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.interceptors.request.use(
-// 	config => {
-// 		let token = localStorage.getItem('token')
-  
-// 		if (token) {
-// 		  config.headers['Authorization'] = `Bearer ${ token }`
-// 		}
-	
-// 		return config
-// 	},
-// 	error => {
-// 		return Promise.reject(error);
-// 	}
-// )
 const healthScore = axios.create({
 	baseURL: API_URL,
 	headers: {
@@ -120,19 +104,35 @@ export const IllnessService = {
 		return apiService
 			.get('critical-illness-icd')
 	},
+	getCriticalList () {
+		return apiService
+			.get('critical-illness-list')
+	},
     
 	getGeneralICD () {
 		return apiService
 			.get('general-illness-icd')
 	},
+	getGeneralList () {
+		return apiService
+			.get('general-illness-list')
+	},
     
 	getMentalICD () {
 		return apiService
 			.get('mental-illness-icd')
+	},
+	getMentalList () {
+		return apiService
+			.get('mental-illness-list')
 	}
 }
 
 export const HealthScoreService = {
+	addIllnessList (payload) {
+		return apiService
+			.post('add-illness-list', payload)
+	},
 	calculateHealthScore (payload) {
 		return apiService
 			.post('calculate-health-score', payload)

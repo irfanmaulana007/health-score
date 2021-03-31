@@ -11,7 +11,8 @@ export default class SideNavigation extends Component {
                 <h4 className="text-center text-light">Health Score</h4>
 
                 <ul className="list-unstyled text-light-1 mt-4">
-                    <Link to="/"><li>Dashboard</li></Link>
+                    <Link to="/dashboard"><li>Dashboard</li></Link>
+                    <Link to="/calculate-score"><li>Calculate Score</li></Link>
                 </ul>
             </nav>
         )

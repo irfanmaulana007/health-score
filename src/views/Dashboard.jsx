@@ -74,22 +74,28 @@ export default class Dashboard extends Component {
     calculateHealthScore = () => {
         store.dispatch(startLoading('Calculating Health Score . . .'));
 
-        const DSPayload = {
-            customer_id: 2,
-            critical_illness: this.state.critical.illnessSelected,
-            general_illness: this.state.general.illnessSelected,
-            mental_illness: this.state.mental.illnessSelected
-        }
+        // const DSPayload = {
+        //     customer_id: 2,
+        //     critical_illness: this.state.critical.illnessSelected,
+        //     general_illness: this.state.general.illnessSelected,
+        //     mental_illness: this.state.mental.illnessSelected
+        // }
 
-        HealthScoreService.calculateHealthScore(this.state);
-        DSService.calculateHealthScore(DSPayload)
-        .then((res) => {
-            this.setState({ score: res.data.score })
-        })
+        HealthScoreService.addIllnessList(this.state)
         .finally(() => {
-            window.scrollTo(0,document.body.scrollHeight);
-            store.dispatch(stopLoading())
+            this.refreshCritical();
+            this.refreshGeneral();
+            this.refreshMental();
+            store.dispatch(stopLoading)
         });
+        // DSService.calculateHealthScore(DSPayload)
+        // .then((res) => {
+        //     this.setState({ score: res.data.score })
+        // })
+        // .finally(() => {
+        //     window.scrollTo(0,document.body.scrollHeight);
+        //     store.dispatch(stopLoading())
+        // });
     }
 
     render () {
@@ -113,7 +119,7 @@ export default class Dashboard extends Component {
                     </div>
                     <br/>
 
-                    {score &&
+                    {/* {score &&
                         <div className="row">
                             <div className="col">
                                 <div className="card mb-3">
@@ -122,7 +128,7 @@ export default class Dashboard extends Component {
                                 </div>
                             </div>
                         </div>
-                    }
+                    } */}
                 </div>
 
                 <Footer />
