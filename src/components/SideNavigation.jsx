@@ -13,6 +13,7 @@ export default class SideNavigation extends Component {
                 <ul className="list-unstyled text-light-1 mt-4">
                     <Link to="/dashboard"><li>Dashboard</li></Link>
                     <Link to="/calculate-score"><li>Calculate Score</li></Link>
+                    <Link to="/master-user"><li>Master User</li></Link>
                 </ul>
             </nav>
         )

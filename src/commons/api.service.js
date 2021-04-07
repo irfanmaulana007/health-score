@@ -9,7 +9,7 @@ const healthScore = axios.create({
 	headers: {
 	  'Accept': 'application/json',
 	  'Content-Type': 'application/json',
-	  'Access-Control-Allow-Origin': '*',
+	//   'Access-Control-Allow-Origin': '*',
 	}
 });
 
@@ -30,7 +30,7 @@ const apiService = {
 				return res
 			})
             .catch((err) => {
-				createErrorObject(err.response.status);
+				// createErrorObject(err.response.status);
 
 				throw err;
             })
@@ -40,7 +40,7 @@ const apiService = {
 		return healthScore
 			.put(resource, params)
             .catch((err) => {
-				createErrorObject(err.response.status);
+				// createErrorObject(err.response.status);
 
 				throw err;
             })
@@ -50,7 +50,7 @@ const apiService = {
 		return healthScore
 			.post(resource, params)
             .catch((err) => {
-				createErrorObject(err.response.status);
+				// createErrorObject(err.response.status);
 
 				throw err;
             })
@@ -60,7 +60,7 @@ const apiService = {
 		return healthScore
 			.delete(resource)
             .catch((err) => {
-				createErrorObject(err.response.status);
+				// createErrorObject(err.response.status);
 
 				throw err;
             })
@@ -135,5 +135,12 @@ export const HealthScoreService = {
 	calculateHealthScore (payload) {
 		return apiService
 			.post('calculate-health-score', payload)
+	}
+}
+
+export const UserService = {
+	get () {
+		return apiService
+			.get('users')
 	}
 }

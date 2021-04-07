@@ -9,7 +9,7 @@ import SideNavigation from '../components/SideNavigation';
 import Footer from '../components/Footer';
 import { createNotification } from '../components/Notifications';
 
-import { DSService, IllnessService, HealthScoreService } from '../commons/api.service';
+import { DSService, IllnessService } from '../commons/api.service';
 
 import store from '../store';
 import { startLoading, stopLoading } from '../actions';
@@ -130,7 +130,7 @@ export default class CalculateScore extends Component {
                     </div>
                     <br/>
 
-                    {score &&
+                    {score !== null  &&
                         <div className="row">
                             <div className="col">
                                 <div className="card mb-3">
