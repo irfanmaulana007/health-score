@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
         }
     }
 
-    refreshGeneral = () => { this.setState({ general: { ...this.state.general, illnessSelected: [] } }) }
+    refreshGeneral = () => { this.setState({ general: { illnessSelected: [], illnessWeight: 0 } }) }
     handleSelectGeneralIllness = (illness) => { this.setState({ general: { ...this.state.general, illnessSelected: illness } }) }
     handleChangeGeneralWeight = (illness, e) => {
         const weight = e.target.value;
@@ -49,7 +49,7 @@ export default class Dashboard extends Component {
         this.setState({ general: { ...this.state.general, illnessWeight: e.target.value } })
     }
 
-    refreshCritical = () => { this.setState({ critical: { ...this.state.critical, illnessSelected: [] } }) }
+    refreshCritical = () => { this.setState({ critical: { illnessSelected: [], illnessWeight: 0 } }) }
     handleSelectCriticalIllness = (illness) => { this.setState({ critical: { ...this.state.critical, illnessSelected: illness } }) }
     handleChangeCriticalWeight = (illness, e) => {
         const weight = e.target.value;
@@ -61,7 +61,7 @@ export default class Dashboard extends Component {
         this.setState({ critical: { ...this.state.critical, illnessWeight: e.target.value } })
     }
 
-    refreshMental = () => { this.setState({ mental: { ...this.state.mental, illnessSelected: [] } }) }
+    refreshMental = () => { this.setState({ mental: { illnessSelected: [], illnessWeight: 0 } }) }
     handleSelectMentalIllness = (illness) => { this.setState({ mental: { ...this.state.mental, illnessSelected: illness } }) }
     handleChangeMentalWeight = (illness, e) => {
         const weight = e.target.value;
