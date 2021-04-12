@@ -74,6 +74,17 @@ export default class Dashboard extends Component {
     }
 
     calculateHealthScore = () => {
+        const criticalWeight = parseFloat(this.state.critical.illnessWeight);
+        const generalWeight = parseFloat(this.state.general.illnessWeight);
+        const mentalWeight = parseFloat(this.state.mental.illnessWeight);
+        const sumIllnessWeight = _.sum([criticalWeight, generalWeight, mentalWeight]);
+
+        if (sumIllnessWeight != 1) {
+            createNotification('error', 'Please adjust the illness weights, sum of it must be 1', 'Submit Failed');
+            
+            return false;
+        }
+        
         store.dispatch(startLoading('Submit Illness List . . .'));
 
         HealthScoreService.addIllnessList(this.state)
@@ -97,8 +108,16 @@ export default class Dashboard extends Component {
 
                 <div className="content">
                     <div className="row">
-                        <General refresh={this.refreshGeneral} handleSelect={this.handleSelectGeneralIllness} handleChangeWeight={this.handleChangeGeneralWeight} state={this.state.general} handleChangeCustomerWeight={this.handleChangeCustomerGeneralWeight} />
+                        <div className="p-3 font-italic small">
+                            <p className="m-0">List provided is mostly based on <b>ICD – 10</b>. For each illness type: <b>critical</b>, <b>general</b> and <b>mental</b>, there are two options: </p>
+                            <ul className="pl-3">
+                                <li><b>General</b> - List given is based on <b>ICD – 10</b> blocks for each ICD-10 chapter and adjusted 36 common critical illness in insurance (for critical illness)</li>
+                                <li><b>Detail</b> - List given is based on <b>ICD - 10</b> category</li>
+                            </ul>
+                        </div>
+
                         <Critical refresh={this.refreshCritical} handleSelect={this.handleSelectCriticalIllness} handleChangeWeight={this.handleChangeCriticalWeight} state={this.state.critical} handleChangeCustomerWeight={this.handleChangeCustomerCriticalWeight} />
+                        <General refresh={this.refreshGeneral} handleSelect={this.handleSelectGeneralIllness} handleChangeWeight={this.handleChangeGeneralWeight} state={this.state.general} handleChangeCustomerWeight={this.handleChangeCustomerGeneralWeight} />
                         <Mental refresh={this.refreshMental} handleSelect={this.handleSelectMentalIllness} handleChangeWeight={this.handleChangeMentalWeight} state={this.state.mental} handleChangeCustomerWeight={this.handleChangeCustomerMentalWeight} />
                 
                         <br/>

@@ -5,6 +5,8 @@
     top: 0;
     padding: 20px 20px 20px 240px;
     border-bottom: 1px solid #ccc;
+    z-index: 1;
+    background-color: #f5f3ef;
 }
 
 #nav ul li { display: inline; }
@@ -15,6 +17,7 @@
     position: fixed;
     left: 0;
     padding: 20px;
+    z-index: 2;
     /* background-color: #21211f; */
 }
 

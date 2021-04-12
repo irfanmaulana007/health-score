@@ -111,11 +111,11 @@ export default class CalculateScore extends Component {
                                 <h4 className="text-dark font-weight-light">Calculate Health Score</h4>
 
                                 <div className="mt-2 mb-2">
-                                    <label className="text-uppercase text-muted small"><b>General Illness</b></label>
-                                    <Select className="mb-3" isMulti options={general_illness_list} onChange={this.handleSelectGeneralIllness}/>
-
                                     <label className="text-uppercase text-muted small"><b>Critical Illness</b></label>
                                     <Select className="mb-3" isMulti options={critical_illness_list} onChange={this.handleSelectCriticalIllness}/>
+                                    
+                                    <label className="text-uppercase text-muted small"><b>General Illness</b></label>
+                                    <Select className="mb-3" isMulti options={general_illness_list} onChange={this.handleSelectGeneralIllness}/>
 
                                     <label className="text-uppercase text-muted small"><b>Mental Illness</b></label>
                                     <Select className="mb-3" isMulti options={mental_illness_list} onChange={this.handleSelectMentalIllness}/>
