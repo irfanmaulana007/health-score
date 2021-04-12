@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import { UserService } from './../commons/api.service';
 
 import store from '../store';
-import { startLoading, stopLoading } from './../actions';
+import { startLoading, stopLoading, setPageHeader } from './../actions';
 import _ from 'lodash';
 
 const dummyUser = [
@@ -41,6 +41,8 @@ export default class MasterUser extends Component {
     }
 
     componentDidMount() {
+        store.dispatch(setPageHeader('Master User'));
+
         this.fetchUserList();
     }
 
@@ -59,8 +61,6 @@ export default class MasterUser extends Component {
                     <div className="row">
                         <div className="col-12">
                             <div className="card mb-3">
-                                <h4 className="text-dark font-weight-light">Master User</h4>
-
                                 <table className="table table-striped small mt-2 mb-2">
                                     <thead>
                                         <tr>

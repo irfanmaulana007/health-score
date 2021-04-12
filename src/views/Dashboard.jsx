@@ -15,7 +15,7 @@ import { createNotification } from '../components/Notifications';
 import { DSService, HealthScoreService } from './../commons/api.service';
 
 import store from './../store';
-import { startLoading, stopLoading } from './../actions';
+import { startLoading, stopLoading, setPageHeader } from './../actions';
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -35,6 +35,10 @@ export default class Dashboard extends Component {
             },
             score: null
         }
+    }
+
+    componentDidMount () {
+        store.dispatch(setPageHeader('Dashboard'));
     }
 
     refreshGeneral = () => { this.setState({ general: { illnessSelected: [], illnessWeight: 0 } }) }

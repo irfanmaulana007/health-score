@@ -1,7 +1,8 @@
 const initialState = {
 	loaders: "invisible",
 	message: "",
-	formError: ''
+	formError: '',
+	pageHeader: '',
 }
 
 export default function utilsReducer(state = initialState, action) {
@@ -24,6 +25,12 @@ export default function utilsReducer(state = initialState, action) {
 			return {
 				...state,
 				formError: action.payload
+			}
+
+		case "SET_PAGE_HEADER":
+			return {
+				...state,
+				pageHeader: action.payload
 			}
 			
 		default: return state;

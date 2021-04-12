@@ -12,7 +12,7 @@ import { createNotification } from '../components/Notifications';
 import { DSService, IllnessService } from '../commons/api.service';
 
 import store from '../store';
-import { startLoading, stopLoading } from '../actions';
+import { startLoading, stopLoading, setPageHeader } from '../actions';
 
 export default class CalculateScore extends Component {
     constructor(props) {
@@ -65,6 +65,8 @@ export default class CalculateScore extends Component {
     }
 
     componentDidMount () {
+        store.dispatch(setPageHeader('Calculate Health Score'));
+
         this.fetchCriticalIllnessList();
         this.fetchGeneralIllnessList();
         this.fetchMentalIllnessList();
@@ -108,8 +110,6 @@ export default class CalculateScore extends Component {
                     <div className="row">
                         <div className="col-12">
                             <div className="card mb-3">
-                                <h4 className="text-dark font-weight-light">Calculate Health Score</h4>
-
                                 <div className="mt-2 mb-2">
                                     <label className="text-uppercase text-muted small"><b>Critical Illness</b></label>
                                     <Select className="mb-3" isMulti options={critical_illness_list} onChange={this.handleSelectCriticalIllness}/>

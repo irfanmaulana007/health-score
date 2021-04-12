@@ -16,3 +16,10 @@ export const formErrorHandler = (field) => {
 		payload: field
 	}
 }
+
+export const setPageHeader = (name) => {
+	return {
+		type: "SET_PAGE_HEADER",
+		payload: name
+	}
+}
